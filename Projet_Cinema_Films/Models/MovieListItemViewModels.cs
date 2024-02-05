@@ -20,7 +20,7 @@ namespace Projet_Cinema_Films.Models
         public string Synopsis { get; set; }
 
         [DisplayName("Poste Url")]
-        public string PostUrl { get; set; }
+        public string PosterUrl { get; set; }
 
         [DisplayName("Duration")]
         public int Duration { get; set; }

@@ -1,5 +1,6 @@
 ﻿using DAL_Projet_Cinema.Entities;
 using Projet_Cinema_Films.Models;
+using System.ComponentModel;
 
 namespace Projet_Cinema_Films.Handlers
 {
@@ -72,6 +73,26 @@ namespace Projet_Cinema_Films.Handlers
         }
 
         #endregion
-        
+
+        #region Movie
+        public static MovieListItemViewModels ToListItem(this Movie entity)
+        {
+            if (entity is null) return null;
+            return new MovieListItemViewModels()
+            {
+                Id_Movie = entity.Id_Movie,
+                Title = entity.Title,
+                Subtitle = entity.SubTitle,
+                ReleaseYear = entity.ReleaseYear,
+                Synopsis = entity.Synopsis,
+                PosterUrl = entity.PosterUrl,
+                Duration = entity.Duration
+            };
+        }
+
+
+
+        #endregion
+
     }
 }

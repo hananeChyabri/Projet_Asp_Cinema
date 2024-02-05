@@ -29,10 +29,10 @@ namespace DAL_Projet_Cinema.Mappers
                 {
                     Id_Movie = (int)record["Id_Movie"],
                     Title = (string)record["Title"],
-                    SubTitle = (string)record["SubTitle"],
+                    SubTitle = (string)((record["Subtitle"] == DBNull.Value) ? null : (string?)record["Subtitle"]),
                     ReleaseYear = (short)record["ReleaseYear"],
-                    Synopsis = (string)record["Number"],
-                    PostUrl = (string)record["PostUrl"],
+                    Synopsis = (string)record["Synopsis"],
+                    PosterUrl = (string)record["PosterUrl"],
                     Duration = (int)record["Duration"]
 
                 };

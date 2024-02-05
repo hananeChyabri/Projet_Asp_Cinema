@@ -12,7 +12,7 @@ namespace DAL_Projet_Cinema.Services
 {
     public class MovieService : BaseService, IMovieRepository<Movie>
     {
-        public MovieService(IConfiguration configuration, string dbname) : base(configuration, dbname)
+        public MovieService(IConfiguration configuration) : base(configuration, "DBSlide")
         {
         }
 

@@ -11,9 +11,9 @@ namespace Projet_Cinema_Films.Controllers
     {
         private readonly IMovieRepository<Movie> _movieRepository;
 
-        public MovieController(IMovieRepository<Movie> cinemaPlaceRepository)
+        public MovieController(IMovieRepository<Movie> movieRepository)
         {
-            _movieRepository = cinemaPlaceRepository;
+            _movieRepository = movieRepository;
 
         }
         // GET: MovieController

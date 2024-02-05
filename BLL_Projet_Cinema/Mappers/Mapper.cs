@@ -41,7 +41,7 @@ namespace BLL_Projet_Cinema.Mappers
                 entity.SubTitle,
                 entity.ReleaseYear,
                 entity.Synopsis,
-                entity.PostUrl,
+                entity.PosterUrl,
                 entity.Duration);
 
         }
