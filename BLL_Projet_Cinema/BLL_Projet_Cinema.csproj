@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DAL_Projet_Cinema\DAL_Projet_Cinema.csproj" />
+    <ProjectReference Include="..\Shared-Projet-Cinema\Shared-Projet-Cinema.csproj" />
+  </ItemGroup>
+
+</Project>

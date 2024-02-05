@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BLL_Projet_Cinema\BLL_Projet_Cinema.csproj" />
+    <ProjectReference Include="..\DAL_Projet_Cinema\DAL_Projet_Cinema.csproj" />
+    <ProjectReference Include="..\Shared-Projet-Cinema\Shared-Projet-Cinema.csproj" />
+  </ItemGroup>
+
+</Project>
