@@ -1,4 +1,4 @@
-﻿using DAL_Projet_Cinema.Entities;
+﻿using BLL_Projet_Cinema.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Projet_Cinema_Films.Handlers;

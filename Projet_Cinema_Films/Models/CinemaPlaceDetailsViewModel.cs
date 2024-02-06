@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Projet_Cinema_Films.Models
 {
-    public class CinemaPlaceDetails
+    public class CinemaPlaceDetailsViewModel
     {
      
 
@@ -14,6 +14,6 @@ namespace Projet_Cinema_Films.Models
         public string Street { get; set; }
         public string Number { get; set; }
 
-        // public IEnumerable<DiffusionDetails> Diffusions { get; set; }
+         public IEnumerable<DiffusionListItemViewModels> Diffusions { get; set; }
     }
 }

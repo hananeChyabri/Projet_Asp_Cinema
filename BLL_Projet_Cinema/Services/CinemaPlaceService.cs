@@ -10,40 +10,46 @@ namespace BLL_Projet_Cinema.Services
 {
     public class CinemaPlaceService : ICinemaPlaceRepository<CinemaPlace>
     {
-        private readonly ICinemaPlaceRepository<DAL.CinemaPlace> _repository;
+        private readonly ICinemaPlaceRepository<DAL.CinemaPlace> _cinemaPlacerepository;
+        private readonly IDiffusionRepository<DAL.Diffusion> _diffusionRepository;
 
-        public CinemaPlaceService(ICinemaPlaceRepository<DAL.CinemaPlace> repository)
+        public CinemaPlaceService(ICinemaPlaceRepository<DAL.CinemaPlace> cinemaPlacerepository, IDiffusionRepository<DAL.Diffusion> diffusionRepository)
         {
-            _repository = repository;
+            _cinemaPlacerepository = cinemaPlacerepository;
+            _diffusionRepository = diffusionRepository;
         }
 
 
         public IEnumerable<CinemaPlace> Get()
         {
-          return _repository.Get().Select(d=>d.ToBLL());
-          
-        }
-
-        public int Insert(CinemaPlace data)
-        {
-            return _repository.Insert(data.ToDAL());
+           return _cinemaPlacerepository.Get().Select(d=>d.ToBLL());
         }
 
         public CinemaPlace Get(int id)
         {
-            return _repository.Get(id).ToBLL();
+            CinemaPlace entity = _cinemaPlacerepository.Get(id).ToBLL();
+            entity.AddDiffusions(_diffusionRepository.GetByCinema(id).Select(d => d.ToBLL()));
+            return entity;
+
         }
+
+        public int Insert(CinemaPlace data)
+        {
+            return _cinemaPlacerepository.Insert(data.ToDAL());
+        }
+
+      
 
 
 
         public bool Update(int id,CinemaPlace data)
         {
-            return _repository.Update(id,data.ToDAL());
+            return _cinemaPlacerepository.Update(id,data.ToDAL());
         }
         //pas de conversion donc pas besoin de passer par le mapper
         public void Delete(int id)
         {
-           _repository.Delete(id);
+            _cinemaPlacerepository.Delete(id);
         }
     }
 }

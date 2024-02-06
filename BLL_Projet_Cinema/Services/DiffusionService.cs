@@ -9,40 +9,43 @@ using BLL_Projet_Cinema.Mappers;
 
 namespace BLL_Projet_Cinema.Services
 {
-    public class MovieService : IMovieRepository<Movie>
+    public class DiffusionService : IDiffusionRepository<Diffusion>
     {
-        private readonly IMovieRepository<DAL.Movie> _repository;
-        public MovieService(IMovieRepository<DAL.Movie> repository)
+        private readonly IDiffusionRepository<DAL.Diffusion> _repository;
+
+        public DiffusionService(IDiffusionRepository<DAL.Diffusion> repository)
         {
             _repository = repository;
         }
+
+        public IEnumerable<Diffusion> GetByCinema(int id)
+        {
+            return _repository.GetByCinema(id).Select(d => d.ToBLL());
+        }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Movie> Get()
-        {
-            return _repository.Get().Select(d => d.ToBLL());
-           
-        }
-
-        public Movie Get(int id)
-        {
-            throw new NotImplementedException();
-
-        }
-
-        public int Insert(Movie data)
+        public IEnumerable<Diffusion> Get()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(int id, Movie data)
+        public Diffusion Get(int id)
         {
             throw new NotImplementedException();
         }
 
-      
+        public int Insert(Diffusion data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(int id, Diffusion data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

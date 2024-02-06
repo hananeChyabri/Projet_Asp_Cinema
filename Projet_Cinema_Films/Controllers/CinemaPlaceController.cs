@@ -1,4 +1,4 @@
-﻿using DAL_Projet_Cinema.Entities;
+﻿using BLL_Projet_Cinema.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Shared_Projet_Cinema.Repositories;
 using Projet_Cinema_Films.Models;
@@ -26,7 +26,7 @@ namespace Projet_Cinema_Films.Controllers
         // GET: CinemaPlaceController/Details/5
         public ActionResult Details(int id)
         {
-            CinemaPlaceDetails model = _cinemaPlaceRepository.Get(id).ToDetails();
+            CinemaPlaceDetailsViewModel model = _cinemaPlaceRepository.Get(id).ToDetails();
 
             return View(model);
         }
@@ -58,17 +58,13 @@ namespace Projet_Cinema_Films.Controllers
         // GET: CinemaPlaceController/Edit/5
         public ActionResult Edit(int id)
         {
-            try
-            {
-                CinemaPlaceEditForm model = new CinemaPlaceEditForm();
-                if (model is null) throw new InvalidDataException();
-                return View(model);
-            }
-            catch (Exception)
+            CinemaPlaceEditForm model = _cinemaPlaceRepository.Get(id).ToEdit();
+            if (model is null)
             {
                 TempData["ErrorMessage"] = $"Identifiant {id} invalide...";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
+            return View(model);
 
 
         }

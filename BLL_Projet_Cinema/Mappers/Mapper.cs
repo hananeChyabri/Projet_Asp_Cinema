@@ -1,4 +1,6 @@
-﻿using BLL = BLL_Projet_Cinema.Entities;
+﻿using DAL_Projet_Cinema.Entities;
+using System;
+using BLL = BLL_Projet_Cinema.Entities;
 using DAL = DAL_Projet_Cinema.Entities;
 
 
@@ -18,6 +20,7 @@ namespace BLL_Projet_Cinema.Mappers
           
         }
 
+   
         public static DAL.CinemaPlace ToDAL(this BLL.CinemaPlace entity)
         {
             if (entity is null) return null;
@@ -44,6 +47,31 @@ namespace BLL_Projet_Cinema.Mappers
                 entity.PosterUrl,
                 entity.Duration);
 
+        }
+
+        /*Mappers Diffusion*/
+
+        public static BLL.Diffusion ToBLL(this DAL.Diffusion entity)
+        {
+            if (entity is null) return null;
+            return new BLL.Diffusion(
+                entity.Id_Diffusion,
+                entity.DiffusionDate,
+                entity.DiffusionTime,
+                Enum.Parse<Languages>(entity.AudioLang),
+                toLanguageSubTitlleLang(entity.SubTitleLang),
+                entity.Id_CinemaRoom,
+                entity.Id_Movie);
+
+        }
+
+
+
+        private static Languages? toLanguageSubTitlleLang(string subTitleLang)
+        {
+            if (subTitleLang is null) return null;
+
+            return Enum.Parse<Languages>(subTitleLang);
         }
     }
 }
