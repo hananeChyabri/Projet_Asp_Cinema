@@ -14,14 +14,14 @@ namespace BLL_Projet_Cinema.Entities
         public string PosterUrl { get; set; }
         public int Duration { get; set; }
 
-        public Movie(int id_Movie, string title, string subTitle, short releaseYear, string synopsis, string PosteUrl, int duration)
+        public Movie(int id_Movie, string title, string subTitle, short releaseYear, string synopsis, string posterUrl, int duration)
         {
             Id_Movie = id_Movie;
             Title = title;
             SubTitle = subTitle;
             ReleaseYear = releaseYear;
             Synopsis = synopsis;
-            PosteUrl = PosteUrl;
+            PosterUrl = posterUrl;
             Duration = duration;
         }
     }

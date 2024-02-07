@@ -49,6 +49,21 @@ namespace BLL_Projet_Cinema.Mappers
 
         }
 
+        public static DAL.Movie ToDAL(this BLL.Movie entity)
+        {
+            if (entity is null) return null;
+            return new DAL.Movie()
+            {
+                Id_Movie = entity.Id_Movie,
+                Title = entity.Title,
+                SubTitle = entity.SubTitle,
+                ReleaseYear = entity.ReleaseYear,
+                Synopsis = entity.Synopsis,
+                PosterUrl = entity.PosterUrl,
+                Duration = entity.Duration
+            };
+        }
+
         /*Mappers Diffusion*/
 
         public static BLL.Diffusion ToBLL(this DAL.Diffusion entity)

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Projet_Cinema_Films.Models.DiffusionListItemViewModels>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DiffusionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiffusionTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AudioLang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTitleLang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_CinemaRoom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Movie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiffusionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiffusionTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AudioLang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTitleLang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_CinemaRoom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Movie)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

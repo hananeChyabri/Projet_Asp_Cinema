@@ -18,7 +18,7 @@ namespace BLL_Projet_Cinema.Services
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+           _repository.Delete(id);
         }
 
         public IEnumerable<Movie> Get()
@@ -29,13 +29,13 @@ namespace BLL_Projet_Cinema.Services
 
         public Movie Get(int id)
         {
-            throw new NotImplementedException();
+            return _repository.Get(id).ToBLL();
 
         }
 
         public int Insert(Movie data)
         {
-            throw new NotImplementedException();
+           return  _repository.Insert(data.ToDAL());
         }
 
         public bool Update(int id, Movie data)

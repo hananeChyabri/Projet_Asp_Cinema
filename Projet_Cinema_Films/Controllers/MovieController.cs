@@ -28,23 +28,29 @@ namespace Projet_Cinema_Films.Controllers
         // GET: MovieController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            MovieDetailsViewModel model = _movieRepository.Get(id).ToDetails();
+
+            return View(model);
         }
 
         // GET: MovieController/Create
         public ActionResult Create()
         {
+      
             return View();
         }
 
         // POST: MovieController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(MovieCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (form is null) ModelState.AddModelError(nameof(form), "Pas de données reçues");
+                if (!ModelState.IsValid) throw new Exception();
+                int id = _movieRepository.Insert(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id });
             }
             catch
             {
@@ -76,16 +82,19 @@ namespace Projet_Cinema_Films.Controllers
         // GET: MovieController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            MovieDeleteForm model = _movieRepository.Get(id).ToDelete();
+            return View(model);
         }
 
         // POST: MovieController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, MovieDeleteForm form)
         {
             try
             {
+                _movieRepository.Delete(id);
+                TempData["Error"] = "Erreur de suppression...";
                 return RedirectToAction(nameof(Index));
             }
             catch

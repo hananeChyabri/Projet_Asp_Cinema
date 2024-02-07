@@ -69,7 +69,7 @@ namespace Projet_Cinema_Films.Handlers
                 City = entity.City,
                 Street = entity.Street,
                 Number = entity.Number,
-               // Diffusions = entity.Diffusions.Select(d=>d.toListItem())
+                Diffusions = entity.Diffusions.Select(d=>d.ToListItem())
             };
         }
 
@@ -113,13 +113,54 @@ namespace Projet_Cinema_Films.Handlers
             };
         }
 
+        public static Movie ToBLL(this MovieCreateForm entity)
+        {
+            if (entity is null) return null;
+            return new Movie(
+
+               0,
+         entity.Title,
+               entity.SubTitle,
+               entity.ReleaseYear,
+              entity.Synopsis,
+              entity.PosterUrl,
+               entity.Duration);
+
+
+        }
+
+        public static MovieDetailsViewModel ToDetails(this Movie entity)
+        {
+            if (entity is null) return null;
+            return new MovieDetailsViewModel()
+            {
+                Id_Movie = entity.Id_Movie,
+                Title = entity.Title,
+                SubTitle = entity.SubTitle,
+                ReleaseYear = entity.ReleaseYear,
+                Synopsis = entity.Synopsis,
+                PosterUrl = entity.PosterUrl,
+                Duration = entity.Duration
+            };
+        }
+
+        public static MovieDeleteForm ToDelete(this Movie entity)
+        {
+            if (entity is null) return null;
+            return new MovieDeleteForm()
+            {
+                Id_Movie = entity.Id_Movie,
+                Title = entity.Title,
+                ReleaseYear = entity.ReleaseYear
+
+            };
+        }
 
 
         #endregion
 
 
         /* Diffusion */
-
 
 
     }
