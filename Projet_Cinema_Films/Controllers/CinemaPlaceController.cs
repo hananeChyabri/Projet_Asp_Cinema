@@ -27,7 +27,7 @@ namespace Projet_Cinema_Films.Controllers
         public ActionResult Details(int id)
         {
             CinemaPlaceDetailsViewModel model = _cinemaPlaceRepository.Get(id).ToDetails();
-
+            ViewBag.Id = id;
             return View(model);
         }
 

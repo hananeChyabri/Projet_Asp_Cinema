@@ -29,6 +29,7 @@ namespace BLL_Projet_Cinema.Entities
             SubTitleLang = subTitleLang;
             Id_CinemaRoom = id_CinemaRoom;
             Id_Movie = id_Movie;
+         
 
         }
 

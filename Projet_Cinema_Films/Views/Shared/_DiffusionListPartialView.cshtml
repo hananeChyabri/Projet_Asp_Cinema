@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<Projet_Cinema_Films.Models.DiffusionListItemViewModels>
+@{
+    int id = ViewBag.Id;
+}
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -19,10 +22,16 @@
                 @Html.DisplayNameFor(model => model.SubTitleLang)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id_CinemaRoom)
+                @Html.DisplayNameFor(model => model.TitleMovie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Movie)
+                @Html.DisplayNameFor(model => model.Subtitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeProjection)
             </th>
             <th></th>
         </tr>
@@ -43,15 +52,17 @@
                 @Html.DisplayFor(modelItem => item.SubTitleLang)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_CinemaRoom)
+
+                    @Html.ActionLink(item.TitleMovie, "Details","Movie", new {  id=item.Id_Movie }) |
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Movie)
+                @Html.DisplayFor(modelItem => item.Subtitle)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeProjection)
             </td>
         </tr>
 }

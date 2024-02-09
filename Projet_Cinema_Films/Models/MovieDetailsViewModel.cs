@@ -15,5 +15,7 @@ namespace Projet_Cinema_Films.Models
         public string Synopsis { get; set; }
         public string PosterUrl { get; set; }
         public int Duration { get; set; }
+
+        public IEnumerable<DiffusionListItemViewModels> Diffusions { get; set; }
     }
 }

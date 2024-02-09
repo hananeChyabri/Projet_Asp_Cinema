@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Details";
+    int id = ViewBag.Id;
+
 }
 
 <h1>Details</h1>
@@ -35,7 +37,8 @@
             @Html.DisplayFor(model => model.Synopsis)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PosterUrl)
+            @* @Html.DisplayNameFor(model => model.PosterUrl) *@
+            <img src="@Url.Content($"~/assets/img/{Model.PosterUrl}")" alt="Movie Poster" />
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.PosterUrl)
@@ -52,3 +55,21 @@
     @Html.ActionLink("Edit", "Edit", new { /*id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<hr />
+<h2>@Html.DisplayNameFor(model => model.Diffusions)</h2>
+@* @Html.Partial("_StudentListPartialView",Model.Students) *@
+@if (Model.Diffusions.Count() > 0)
+{
+    <partial name="_DiffusionListPartialView" model="Model.Diffusions" />
+}
+else
+{
+    <div>
+        <p>
+            <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
+        </p>
+        <p>pas de diffusion pour le moment peut-être en ajouter ?</p>
+        <a asp-action="index" asp-controller="diffusion">Voir la liste des diffusions ?</a>
+    </div>
+}

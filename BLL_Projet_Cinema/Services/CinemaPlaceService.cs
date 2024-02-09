@@ -11,9 +11,9 @@ namespace BLL_Projet_Cinema.Services
     public class CinemaPlaceService : ICinemaPlaceRepository<CinemaPlace>
     {
         private readonly ICinemaPlaceRepository<DAL.CinemaPlace> _cinemaPlacerepository;
-        private readonly IDiffusionRepository<DAL.Diffusion> _diffusionRepository;
+        private readonly IDiffusionRepository<Diffusion> _diffusionRepository;
 
-        public CinemaPlaceService(ICinemaPlaceRepository<DAL.CinemaPlace> cinemaPlacerepository, IDiffusionRepository<DAL.Diffusion> diffusionRepository)
+        public CinemaPlaceService(ICinemaPlaceRepository<DAL.CinemaPlace> cinemaPlacerepository, IDiffusionRepository<Diffusion> diffusionRepository)
         {
             _cinemaPlacerepository = cinemaPlacerepository;
             _diffusionRepository = diffusionRepository;
@@ -28,7 +28,8 @@ namespace BLL_Projet_Cinema.Services
         public CinemaPlace Get(int id)
         {
             CinemaPlace entity = _cinemaPlacerepository.Get(id).ToBLL();
-            entity.AddDiffusions(_diffusionRepository.GetByCinema(id).Select(d => d.ToBLL()));
+            IEnumerable<Diffusion> diffusion = _diffusionRepository.GetByCinema(id);
+            entity.AddDiffusions(diffusion);
             return entity;
 
         }

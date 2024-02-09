@@ -78,9 +78,22 @@ namespace Projet_Cinema_Films.Handlers
             if (entity is null) return null;
             return new DiffusionListItemViewModels()
             {
-           
+
+                AudioLang = entity.AudioLang,
+                DiffusionDate = entity.DiffusionDate,
+                DiffusionTime = entity.DiffusionTime,
+                TitleMovie = entity.Movie.Title,
+                Subtitle = entity.Movie.SubTitle,
+                Duration = entity.Movie.Duration,
+                TypeProjection = entity.CinemaRoom.Can3D ? "3DX" : "4DX",
+                Id_Movie = entity.Id_Movie
+
+
             };
         }
+
+   
+    
 
         public static CinemaPlaceEditForm ToEdit(this CinemaPlace entity)
         {
@@ -140,7 +153,8 @@ namespace Projet_Cinema_Films.Handlers
                 ReleaseYear = entity.ReleaseYear,
                 Synopsis = entity.Synopsis,
                 PosterUrl = entity.PosterUrl,
-                Duration = entity.Duration
+                Duration = entity.Duration,
+                Diffusions = entity.Diffusions.Select(d => d.ToListItem())
             };
         }
 
@@ -160,7 +174,44 @@ namespace Projet_Cinema_Films.Handlers
         #endregion
 
 
+
+        #region Diffusion
         /* Diffusion */
+
+
+        public static Diffusion ToBLL(this DiffusionCreateForm entity)
+        {
+            if (entity is null) return null;
+            return new Diffusion(
+
+                0,
+                entity.DiffusionDate,
+                entity.DiffusionTime,
+                entity.AudioLang,
+                entity.SubTitleLang,
+                entity.Id_CinemaRoom,
+                entity.Id_Movie);
+
+        }
+        #endregion
+
+
+        public static CinemaRoom ToBLL(this CinemaRoomCreateForm entity)
+        {
+            if (entity is null) return null;
+            return new CinemaRoom(
+
+                0,
+                entity.SitsCount,
+                entity.Number,
+                entity.ScreenWidth,
+                entity.ScreenHeight,
+                entity.Can3D,
+                entity.Can4DX,
+                entity.Id_cinemaPlace);
+
+
+        }
 
 
     }

@@ -11,31 +11,39 @@ namespace BLL_Projet_Cinema.Services
 {
     public class MovieService : IMovieRepository<Movie>
     {
-        private readonly IMovieRepository<DAL.Movie> _repository;
-        public MovieService(IMovieRepository<DAL.Movie> repository)
+        private readonly IMovieRepository<DAL.Movie> _movieRepository;
+        private readonly IDiffusionRepository<Diffusion> _diffusionRepository;
+
+        public MovieService(IMovieRepository<DAL.Movie> movieRepository, IDiffusionRepository<Diffusion> diffusionRepository)
         {
-            _repository = repository;
+            _movieRepository = movieRepository;
+            _diffusionRepository = diffusionRepository;
         }
         public void Delete(int id)
         {
-           _repository.Delete(id);
+            _movieRepository.Delete(id);
         }
 
         public IEnumerable<Movie> Get()
         {
-            return _repository.Get().Select(d => d.ToBLL());
+            return _movieRepository.Get().Select(d => d.ToBLL());
            
         }
 
         public Movie Get(int id)
         {
-            return _repository.Get(id).ToBLL();
+     
+
+            Movie entity = _movieRepository.Get(id).ToBLL();
+            IEnumerable<Diffusion> diffusion = _diffusionRepository.GetByMovie(id);
+            entity.AddDiffusions(diffusion);
+            return entity;
 
         }
 
         public int Insert(Movie data)
         {
-           return  _repository.Insert(data.ToDAL());
+           return _movieRepository.Insert(data.ToDAL());
         }
 
         public bool Update(int id, Movie data)

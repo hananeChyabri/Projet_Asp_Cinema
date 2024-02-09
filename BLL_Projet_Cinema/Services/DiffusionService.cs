@@ -9,18 +9,51 @@ using BLL_Projet_Cinema.Mappers;
 
 namespace BLL_Projet_Cinema.Services
 {
+    
     public class DiffusionService : IDiffusionRepository<Diffusion>
     {
-        private readonly IDiffusionRepository<DAL.Diffusion> _repository;
+        private readonly IDiffusionRepository<DAL.Diffusion> _diffusionRepository;
+        private readonly IMovieRepository<DAL.Movie> _movieRepository;
+        private readonly ICinemaRoomRepository<DAL.CinemaRoom> _cinemaRoomRepository;
 
-        public DiffusionService(IDiffusionRepository<DAL.Diffusion> repository)
+        public DiffusionService(IDiffusionRepository<DAL.Diffusion> diffusionRepository, IMovieRepository<DAL.Movie> movieRepository, ICinemaRoomRepository<DAL.CinemaRoom> cinemaRoomRepository)
         {
-            _repository = repository;
+            _diffusionRepository = diffusionRepository;
+            _movieRepository = movieRepository;
+            _cinemaRoomRepository = cinemaRoomRepository;
         }
 
         public IEnumerable<Diffusion> GetByCinema(int id)
         {
-            return _repository.GetByCinema(id).Select(d => d.ToBLL());
+
+            //return _diffusionRepository.GetByCinema(id).Select(d => d.ToBLL()
+              
+            //);
+
+
+            return _diffusionRepository.GetByCinema(id).Select(d =>
+            {
+                Diffusion result = d.ToBLL();
+                result.Movie = _movieRepository.Get(result.Id_Movie).ToBLL();
+                result.CinemaRoom = _cinemaRoomRepository.Get(result.Id_CinemaRoom).ToBLL();
+                return result;
+            });
+
+
+        }
+
+        public IEnumerable<Diffusion> GetByMovie(int id)
+        {
+
+            return _diffusionRepository.GetByMovie(id).Select(d =>
+            {
+                Diffusion result = d.ToBLL();
+                result.Movie = _movieRepository.Get(result.Id_Movie).ToBLL();
+                result.CinemaRoom = _cinemaRoomRepository.Get(result.Id_CinemaRoom).ToBLL();
+                return result;
+            });
+
+
         }
 
         public void Delete(int id)
@@ -40,7 +73,7 @@ namespace BLL_Projet_Cinema.Services
 
         public int Insert(Diffusion data)
         {
-            throw new NotImplementedException();
+            return _diffusionRepository.Insert(data.ToDAL());
         }
 
         public bool Update(int id, Diffusion data)

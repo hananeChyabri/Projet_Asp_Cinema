@@ -53,6 +53,26 @@ namespace DAL_Projet_Cinema.Mappers
 
             };
         }
+
+
+        /**/
+
+        public static CinemaRoom ToCinemaRoom(this IDataRecord record)
+        {
+            if (record is null) return null;
+            return new CinemaRoom()
+            {
+                Id_CinemaRoom = (int)record["Id_CinemaRoom"],
+                SitsCount = (int)record["seatsCount"],
+                Number = (int)record["Number"],
+                ScreenWidth = (int)record["ScreenWidth"],
+                ScreenHeight = (int)record["ScreenHeight"],
+                Can3D = (bool)record["Can3D"],
+                Can4DX = (bool)record["Can4DX"],
+
+            };
+        }
     }
+
     
 }
