@@ -23,7 +23,23 @@ namespace DAL_Projet_Cinema.Services
 
         public IEnumerable<CinemaRoom> Get()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_CinemaRoom_GetAll";
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToCinemaRoom();
+                        }
+                    }
+                }
+
+            }
         }
 
         public CinemaRoom Get(int id)

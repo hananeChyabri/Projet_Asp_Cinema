@@ -25,7 +25,8 @@ namespace BLL_Projet_Cinema.Services
 
         public IEnumerable<CinemaRoom> Get()
         {
-            throw new NotImplementedException();
+       
+            return _cinemaRoomRepository.Get().Select(d => d.ToBLL());
         }
 
         public CinemaRoom Get(int id)

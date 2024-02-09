@@ -69,6 +69,7 @@ namespace Projet_Cinema_Films.Handlers
                 City = entity.City,
                 Street = entity.Street,
                 Number = entity.Number,
+                CinemaRooms = entity.CinemaRooms.Select(d => d.ToListItem()),
                 Diffusions = entity.Diffusions.Select(d=>d.ToListItem())
             };
         }
@@ -86,14 +87,25 @@ namespace Projet_Cinema_Films.Handlers
                 Subtitle = entity.Movie.SubTitle,
                 Duration = entity.Movie.Duration,
                 TypeProjection = entity.CinemaRoom.Can3D ? "3DX" : "4DX",
-                Id_Movie = entity.Id_Movie
-
-
+                Id_Movie = entity.Id_Movie,
+                NumeroCinemaRoom = entity.CinemaRoom.Number,
             };
         }
 
-   
-    
+        public static CinemaRoomListItemViewModels ToListItem(this CinemaRoom entity)
+        {
+            if (entity is null) return null;
+            return new CinemaRoomListItemViewModels()
+            {
+
+                Numebr = entity.Number,
+                typePrpjection = entity.Can3D ? "3DX" : "4DX",
+                sitCount = entity.SitsCount
+            };
+        }
+
+
+
 
         public static CinemaPlaceEditForm ToEdit(this CinemaPlace entity)
         {

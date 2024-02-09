@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Projet_Cinema_Films.Models.DiffusionListItemViewModels>
 @{
-    int id = ViewBag.Id;
+    // int id = ViewBag.Id;
 }
 
 <p>
-    <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
+    @* <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a> *@
 </p>
 <table class="table">
     <thead>
         <tr>
+           <th>
+                @Html.DisplayNameFor(model => model.NumeroCinemaRoom)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DiffusionDate)
             </th>
@@ -39,6 +42,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+             <td>
+                    @Html.DisplayFor(modelItem => item.NumeroCinemaRoom)
+             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DiffusionDate)
             </td>

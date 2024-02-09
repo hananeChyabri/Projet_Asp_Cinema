@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
-    int id = ViewBag.Id;
+    // int id = ViewBag.Id;
 
 }
 
@@ -67,7 +67,7 @@ else
 {
     <div>
         <p>
-            <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
+            @* <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a> *@
         </p>
         <p>pas de diffusion pour le moment peut-être en ajouter ?</p>
         <a asp-action="index" asp-controller="diffusion">Voir la liste des diffusions ?</a>

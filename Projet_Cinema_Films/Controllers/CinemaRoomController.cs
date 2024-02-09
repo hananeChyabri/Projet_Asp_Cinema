@@ -21,7 +21,9 @@ namespace Projet_Cinema_Films.Controllers
         // GET: CinemaRoomController
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<CinemaRoomListItemViewModels> model = _cinemaRoomRepository.Get().Select(d => d.ToListItem());
+
+            return View(model);
         }
 
         // GET: CinemaRoomController/Details/5

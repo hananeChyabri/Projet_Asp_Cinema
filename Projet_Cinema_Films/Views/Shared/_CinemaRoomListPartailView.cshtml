@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Projet_Cinema_Films.Models.CinemaRoomListItemViewModels>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Numebr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.typePrpjection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sitCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numebr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.typePrpjection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sitCount)
+            </td>
+            <td>
+                @* @Html.ActionLink("Details", "Details", new {  id=Model.id})  *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

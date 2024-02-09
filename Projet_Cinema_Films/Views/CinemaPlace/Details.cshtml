@@ -43,8 +43,27 @@
 </div>
 
 <hr />
+<h2>@Html.DisplayNameFor(model => model.CinemaRooms)</h2>
+@if (Model.CinemaRooms.Count() > 0)
+{
+    <partial name="_CinemaRoomListPartailView" model="Model.CinemaRooms" />
+}
+else
+{
+    <div>
+        <p>
+            <a asp-action="Create" asp-controller="CinemaRoom" asp-route-id_cinemaPlace="@id">Create New</a>
+        </p>
+        <p>pas de diffusion pour le moment peut-être en ajouter ?</p>
+        <a asp-action="index" asp-controller="diffusion">Voir la liste des diffusions ?</a>
+    </div>
+}
+
+<hr />
 <h2>@Html.DisplayNameFor(model => model.Diffusions)</h2>
-@* @Html.Partial("_StudentListPartialView",Model.Students) *@
+<p>
+    <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
+</p>
 @if (Model.Diffusions.Count() > 0)
 {
     <partial name="_DiffusionListPartialView" model="Model.Diffusions" />
@@ -52,9 +71,7 @@
 else
 {
     <div>
-        <p>
-            <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a>
-        </p>
+        
         <p>pas de diffusion pour le moment peut-être en ajouter ?</p>
         <a asp-action="index" asp-controller="diffusion">Voir la liste des diffusions ?</a>
     </div>

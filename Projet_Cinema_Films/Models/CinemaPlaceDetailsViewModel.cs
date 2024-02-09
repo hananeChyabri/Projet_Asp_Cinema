@@ -14,6 +14,9 @@ namespace Projet_Cinema_Films.Models
         public string Street { get; set; }
         public string Number { get; set; }
 
-         public IEnumerable<DiffusionListItemViewModels> Diffusions { get; set; }
+        [DisplayName("toute les diffusions")]
+        public IEnumerable<DiffusionListItemViewModels> Diffusions { get; set; }
+        [DisplayName("La liste des salles")]
+        public IEnumerable<CinemaRoomListItemViewModels> CinemaRooms { get; set; }
     }
 }
