@@ -44,10 +44,6 @@ namespace BLL_Projet_Cinema.Services
             return _cinemaPlacerepository.Insert(data.ToDAL());
         }
 
-      
-
-
-
         public bool Update(int id,CinemaPlace data)
         {
             return _cinemaPlacerepository.Update(id,data.ToDAL());
@@ -56,6 +52,13 @@ namespace BLL_Projet_Cinema.Services
         public void Delete(int id)
         {
             _cinemaPlacerepository.Delete(id);
+        }
+
+        public CinemaPlace GetByDiffusion(int id)
+        {
+
+            return _cinemaPlacerepository.GetByDiffusion(id).ToBLL();
+
         }
     }
 }

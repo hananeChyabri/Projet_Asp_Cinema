@@ -21,7 +21,8 @@ namespace Projet_Cinema_Films.Controllers
         // GET: DiffusionController
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<DiffusionListItemViewModels> model = _diffusionRepository.Get().Select(d => d.ToListItem());
+            return View(model);
         }
 
         // GET: DiffusionController/Details/5
@@ -79,20 +80,30 @@ namespace Projet_Cinema_Films.Controllers
         // GET: DiffusionController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DiffusionDeleteForm model = _diffusionRepository.Get(id).ToDelete();
+            if (model is null)
+            {
+                TempData["Error"] = "Diffusion inexistante...";
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
 
         // POST: DiffusionController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, DiffusionDeleteForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                int idCinemaPlace = form.Id_cinemaPlace;
+               _diffusionRepository.Delete(id);
+       
+                return RedirectToAction(nameof(Details),nameof(CinemaPlace), new { id = form.Id_cinemaPlace }); 
             }
             catch
             {
+                TempData["Error"] = "Erreur de suppression...";
                 return View();
             }
         }

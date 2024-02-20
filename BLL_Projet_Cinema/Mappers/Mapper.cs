@@ -96,6 +96,7 @@ namespace BLL_Projet_Cinema.Mappers
                 entity.DiffusionTime,
                 Enum.Parse<BLL.Languages>(entity.AudioLang),
                 toLanguageSubTitlleLang(entity.SubTitleLang),
+                entity.Id_CinemaPlace,
                 entity.Id_CinemaRoom,
                 entity.Id_Movie);
 

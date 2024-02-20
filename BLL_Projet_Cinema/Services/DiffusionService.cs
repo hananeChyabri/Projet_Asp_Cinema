@@ -15,27 +15,26 @@ namespace BLL_Projet_Cinema.Services
         private readonly IDiffusionRepository<DAL.Diffusion> _diffusionRepository;
         private readonly IMovieRepository<DAL.Movie> _movieRepository;
         private readonly ICinemaRoomRepository<DAL.CinemaRoom> _cinemaRoomRepository;
+        private readonly ICinemaPlaceRepository<DAL.CinemaPlace> _cinemaPlaceRepository;
 
-        public DiffusionService(IDiffusionRepository<DAL.Diffusion> diffusionRepository, IMovieRepository<DAL.Movie> movieRepository, ICinemaRoomRepository<DAL.CinemaRoom> cinemaRoomRepository)
+        public DiffusionService(IDiffusionRepository<DAL.Diffusion> diffusionRepository, IMovieRepository<DAL.Movie> movieRepository, ICinemaRoomRepository<DAL.CinemaRoom> cinemaRoomRepository, ICinemaPlaceRepository<DAL.CinemaPlace> cinemaPlaceRepository)
         {
             _diffusionRepository = diffusionRepository;
             _movieRepository = movieRepository;
             _cinemaRoomRepository = cinemaRoomRepository;
+            _cinemaPlaceRepository = cinemaPlaceRepository;
         }
 
         public IEnumerable<Diffusion> GetByCinema(int id)
         {
 
-            //return _diffusionRepository.GetByCinema(id).Select(d => d.ToBLL()
-              
-            //);
-
-
             return _diffusionRepository.GetByCinema(id).Select(d =>
             {
                 Diffusion result = d.ToBLL();
+                result.cinemaPlace = _cinemaPlaceRepository.GetByDiffusion(id).ToBLL();
                 result.Movie = _movieRepository.Get(result.Id_Movie).ToBLL();
                 result.CinemaRoom = _cinemaRoomRepository.Get(result.Id_CinemaRoom).ToBLL();
+                result.Id_CinemaPlace = result.cinemaPlace.Id_CinemaPlace;
                 return result;
             });
 
@@ -50,6 +49,8 @@ namespace BLL_Projet_Cinema.Services
                 Diffusion result = d.ToBLL();
                 result.Movie = _movieRepository.Get(result.Id_Movie).ToBLL();
                 result.CinemaRoom = _cinemaRoomRepository.Get(result.Id_CinemaRoom).ToBLL();
+                result.cinemaPlace = _cinemaPlaceRepository.GetByDiffusion(id).ToBLL();
+                result.Id_CinemaPlace = result.cinemaPlace.Id_CinemaPlace;
                 return result;
             });
 
@@ -58,17 +59,31 @@ namespace BLL_Projet_Cinema.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _diffusionRepository.Delete(id);
         }
 
         public IEnumerable<Diffusion> Get()
         {
-            throw new NotImplementedException();
+            return _diffusionRepository.Get().Select(d =>
+            {
+                Diffusion result = d.ToBLL();
+                result.cinemaPlace = _cinemaPlaceRepository.GetByDiffusion(result.Id_Diffusion).ToBLL();
+                result.Movie = _movieRepository.Get(result.Id_Movie).ToBLL();
+                result.CinemaRoom = _cinemaRoomRepository.Get(result.Id_CinemaRoom).ToBLL();
+                result.Id_CinemaPlace = result.cinemaPlace.Id_CinemaPlace;
+                return result;
+            });
+
         }
 
         public Diffusion Get(int id)
         {
-            throw new NotImplementedException();
+                Diffusion result = _diffusionRepository.Get(id).ToBLL();
+                result.cinemaPlace = _cinemaPlaceRepository.GetByDiffusion(id).ToBLL();
+            
+                result.Id_CinemaPlace = result.cinemaPlace.Id_CinemaPlace;
+                return result;
+          
         }
 
         public int Insert(Diffusion data)

@@ -112,5 +112,28 @@ namespace DAL_Projet_Cinema.Services
                 }
             }
         }
-    }
+
+        public CinemaPlace GetByDiffusion(int id)
+        {
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM [CinemaPlace] cp JOIN [CinemaRoom] cr ON cp.Id_CinemaPlace = cr.Id_CinemaPlace JOIN [Diffusion] d ON cr.Id_CinemaRoom = d.Id_cinemaRoom WHERE d.Id_diffusion = @id";
+                    command.Parameters.AddWithValue("id", id);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read()) return reader.ToCinemaPlace();
+                        throw new ArgumentException(nameof(id), $"L'identifiant {id} n'existe pas dans la base de données.");
+                    }
+                }
+            }
+
+
+
+
+            }
+        }
 }

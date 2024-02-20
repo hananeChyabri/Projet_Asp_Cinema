@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Projet_Cinema_Films.Models.DiffusionListItemViewModels>
+
 @{
-    // int id = ViewBag.Id;
+    ViewData["Title"] = "Index";
 }
 
+<h1>Index</h1>
+
 <p>
-    @* <a asp-action="Create" asp-controller="Diffusion" asp-route-id_cinemaPlace="@id">Create New</a> *@
+    <a asp-action="Create">Pour Ajouter une nouvelle diffusion</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-           <th>
-                @Html.DisplayNameFor(model => model.NumeroCinemaRoom)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DiffusionDate)
             </th>
@@ -36,15 +36,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.TypeProjection)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroCinemaRoom)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-             <td>
-                    @Html.DisplayFor(modelItem => item.NumeroCinemaRoom)
-             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DiffusionDate)
             </td>
@@ -58,8 +58,7 @@
                 @Html.DisplayFor(modelItem => item.SubTitleLang)
             </td>
             <td>
-
-                    @Html.ActionLink(item.TitleMovie, "Details","Movie", new {  id=item.Id_Movie }) |
+                @Html.DisplayFor(modelItem => item.TitleMovie)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Subtitle)
@@ -70,9 +69,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TypeProjection)
             </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete","Diffusion", new {  id=item.Id_Diffusion })
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroCinemaRoom)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
         </tr>
 }
     </tbody>

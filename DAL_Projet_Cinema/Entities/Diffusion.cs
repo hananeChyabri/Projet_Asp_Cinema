@@ -12,7 +12,9 @@ namespace DAL_Projet_Cinema.Entities
         public DateTime DiffusionDate { get; set; }
         public TimeSpan DiffusionTime { get; set; }
         public string AudioLang { get; set; }
-        public string? SubTitleLang { get; set; } 
+        public string? SubTitleLang { get; set; }
+
+        public int Id_CinemaPlace { get; set; }
         public int Id_CinemaRoom { get; set; }
         public int Id_Movie { get; set; }
         public CinemaRoom CinemaRoom { get; set; }

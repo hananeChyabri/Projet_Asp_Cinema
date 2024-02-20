@@ -31,6 +31,13 @@ namespace BLL_Projet_Cinema.Entities
             }
         }
 
+        public CinemaPlace()
+        {
+            // Initialize collections to prevent null reference exceptions
+            _diffusions = new List<Diffusion>();
+            _cinemaRooms = new List<CinemaRoom>();
+        }
+
         public CinemaPlace(int id_CinemaPlace, string name, string city, string street, string number)
         {
             Id_CinemaPlace = id_CinemaPlace;

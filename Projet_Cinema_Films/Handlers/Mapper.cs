@@ -1,6 +1,7 @@
 ﻿using BLL_Projet_Cinema.Entities;
 using Projet_Cinema_Films.Models;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projet_Cinema_Films.Handlers
 {
@@ -88,7 +89,9 @@ namespace Projet_Cinema_Films.Handlers
                 Duration = entity.Movie.Duration,
                 TypeProjection = entity.CinemaRoom.Can3D ? "3DX" : "4DX",
                 Id_Movie = entity.Id_Movie,
+                Id_Diffusion = entity.Id_Diffusion,
                 NumeroCinemaRoom = entity.CinemaRoom.Number,
+                Id_CinemaPlace = entity.cinemaPlace.Id_CinemaPlace,
             };
         }
 
@@ -225,6 +228,17 @@ namespace Projet_Cinema_Films.Handlers
 
         }
 
+        public static DiffusionDeleteForm ToDelete(this  Diffusion entity)
+        {
+            if (entity is null) return null;
+            return new DiffusionDeleteForm()
+            {
+                Id_Diffusion = entity.Id_Diffusion,
+                DiffusionDate = entity.DiffusionDate,
+                DiffusionTime = entity.DiffusionTime,
+                Id_cinemaPlace = entity.Id_CinemaPlace,
+            };
+        }
 
     }
 }

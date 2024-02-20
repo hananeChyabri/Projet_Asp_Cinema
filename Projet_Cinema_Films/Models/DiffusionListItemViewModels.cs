@@ -27,5 +27,11 @@ namespace Projet_Cinema_Films.Models
         [ScaffoldColumn(false)]
         public int Id_CinemaRoom { get; set; }
 
+        [ScaffoldColumn(false)]
+        public int Id_Diffusion { get; set; }
+
+        [ScaffoldColumn(false)]
+        public int Id_CinemaPlace { get; set; }
+
     }
 }

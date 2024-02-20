@@ -23,7 +23,7 @@ namespace Projet_Cinema_Films.Controllers
             return View(model);
         }
 
-        // GET: CinemaPlaceController/Details/5
+        // GET: CinemaPlaceController/Details/id
         public ActionResult Details(int id)
         {
             CinemaPlaceDetailsViewModel model = _cinemaPlaceRepository.Get(id).ToDetails();

@@ -19,17 +19,59 @@ namespace DAL_Projet_Cinema.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Diffusion_Delete";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("id_diffusion", id);
+                    connection.Open();
+                    if (command.ExecuteNonQuery() <= 0)
+                        throw new ArgumentException(nameof(id), $"L'identifiant {id} n'est pas dans la base de données");
+                }
+            }
+
         }
 
         public IEnumerable<Diffusion> Get()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Diffusion_GetAll";
+                    command.CommandType = CommandType.StoredProcedure;
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToDiffusion();
+                        }
+                    }
+                }
+            }
         }
 
         public Diffusion Get(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Diffusion_GetById";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("id_diffusion", id);
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read()) return reader.ToDiffusion();
+                        throw new ArgumentException(nameof(id), $"L'identifiant {id} n'existe pas dans la base de données.");
+                    }
+
+                }
+            }
         }
 
         public int Insert(Diffusion data)
